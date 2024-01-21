@@ -16,10 +16,9 @@ Worm? Stager? Wiper? Etc
 Talk about Vulnerability Being Exploited
 
 ## Features to Add
-- github on corner
-- footer with info
 - about description of tool
-
+- make initial comments
+- go back to home 
 
 1. Make selection buttons
 
