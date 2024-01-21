@@ -14,3 +14,12 @@ A web app prompt based payload generation and description tool
 What type of payload is it?
 Worm? Stager? Wiper? Etc
 Talk about Vulnerability Being Exploited
+
+## Features to Add
+- github on corner
+- footer with info
+- about description of tool
+
+
+1. Make selection buttons
+

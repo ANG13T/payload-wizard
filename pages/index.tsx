@@ -16,6 +16,17 @@ export default function Home() {
   const [loading, setLoading] = useState<boolean>(false);
   const [hasTranslated, setHasTranslated] = useState<boolean>(false);
   const [apiKey, setApiKey] = useState<string>('');
+  const [isHome, setIsHome] = useState<boolean>(true);
+  const [isGeneration, setIsGeneration] = useState<boolean>(false);
+
+  const handleToggleIsGeneration = () => {
+    setIsGeneration(!isGeneration);
+  }
+
+   const setHomeOff = () => {
+    setIsHome(false);
+  }
+
 
   const handleTranslate = async () => {
     const maxCodeLength = model === 'gpt-3.5-turbo' ? 6000 : 12000;
@@ -140,9 +151,30 @@ export default function Home() {
       </Head>
       <div className="flex h-full min-h-screen flex-col items-center bg-[#0E1117] px-4 pb-20 text-neutral-200 sm:px-10">
         <div className="mt-10 flex flex-col items-center justify-center sm:mt-20">
-          <div className="text-4xl font-bold">AI Code Translator</div>
+          <img className="h-[300px]" src="/logo.png" />
+          <img className="h-[50px] mt-10" src="/text.png" />
         </div>
+      
+      { isHome && 
+      <div className="w-full flex flex-col items-center mt-5">
+          <button
+            className="w-[600px] mt-10 text-xl font-mono cursor-pointer rounded-md bg-[#8933b6] px-4 border border-white-700 px-4 py-4 font-bold hover:bg-violet-600 active:bg-violet-700"
+            onClick={() => handleTranslate()}
+          >
+          Payload Generation   🪄
+          </button>
 
+          <button
+            className="w-[600px] mt-10 text-xl font-mono cursor-pointer rounded-md  bg-[#8933b6] px-4 border border-white-700 px-4 py-4 font-bold hover:bg-violet-600 active:bg-violet-700"
+            onClick={() => handleTranslate()}
+          >
+          Payload Interpreter   ✨
+          </button>
+
+
+      </div>}
+       { !isHome && 
+        <div className="w-full flex flex-col items-center">
         <div className="mt-6 text-center text-sm">
           <APIKeyInput apiKey={apiKey} onChange={handleApiKeyChange} />
         </div>
@@ -219,7 +251,19 @@ export default function Home() {
             )}
           </div>
         </div>
+        </div>
+        }
+
+
+
       </div>
+
+      <footer class="bg-[#0e1117]">
+    <div class="w-full max-w-screen-xl mx-auto p-4">
+        <span class="block text-sm text-white sm:text-center font-mono">Developed by <a href="angelinatsuboi.com" target="_blank" class="hover:underline">Angelina Tsuboi</a> for <a href="angelinatsuboi.com" target="_blank" class="hover:underline">Stellaryx Labs</a></span>
+    </div>
+</footer>
+
     </>
   );
 }
