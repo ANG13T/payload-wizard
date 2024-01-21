@@ -273,26 +273,6 @@ export default function Home() {
           <div className="h-100 flex flex-col justify-center space-y-2 sm:w-2/4">
             <div className="text-center text-xl font-bold">Payload</div>
 
-            <LanguageSelect
-              language={inputLanguage}
-              onChange={(value) => {
-                setInputLanguage(value);
-                setHasTranslated(false);
-                setInputCode('');
-                setOutputCode('');
-              }}
-            />
-
-            {inputLanguage === 'Natural Language' ? (
-              <TextBlock
-                text={inputCode}
-                editable={!loading}
-                onChange={(value) => {
-                  setInputCode(value);
-                  setHasTranslated(false);
-                }}
-              />
-            ) : (
               <CodeBlock
                 code={inputCode}
                 editable={!loading}
@@ -300,8 +280,9 @@ export default function Home() {
                   setInputCode(value);
                   setHasTranslated(false);
                 }}
+                defaultText="Input payload code here..."
               />
-            )}
+
           </div>
           <div className="mt-8 flex h-full flex-col justify-center space-y-2 sm:mt-0 sm:w-2/4">
             <div className="text-center text-xl font-bold">Output</div>
