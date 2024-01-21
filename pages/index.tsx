@@ -5,6 +5,7 @@ import { ModelSelect } from '@/components/ModelSelect';
 import { TextBlock } from '@/components/TextBlock';
 import { OpenAIModel, TranslateBody } from '@/types/types';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 export default function Home() {
@@ -26,7 +27,6 @@ export default function Home() {
    const setHomeOff = () => {
     setIsHome(false);
   }
-
 
   const handleTranslate = async () => {
     const maxCodeLength = model === 'gpt-3.5-turbo' ? 6000 : 12000;
@@ -150,7 +150,17 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="flex h-full min-h-screen flex-col items-center bg-[#0E1117] px-4 pb-20 text-neutral-200 sm:px-10">
-        <div className="mt-10 flex flex-col items-center justify-center sm:mt-20">
+  
+  <Link href="https://github.com/ANG13T/payload-wizard" target="_blank">
+  <button type="button" class="absolute top-5 right-5 text-white border-white-700 border-2 bg-black-700 hover:bg-[#8933b6] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+<svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+<path fill-rule="evenodd" d="M10 .333A9.911 9.911 0 0 0 6.866 19.65c.5.092.678-.215.678-.477 0-.237-.01-1.017-.014-1.845-2.757.6-3.338-1.169-3.338-1.169a2.627 2.627 0 0 0-1.1-1.451c-.9-.615.07-.6.07-.6a2.084 2.084 0 0 1 1.518 1.021 2.11 2.11 0 0 0 2.884.823c.044-.503.268-.973.63-1.325-2.2-.25-4.516-1.1-4.516-4.9A3.832 3.832 0 0 1 4.7 7.068a3.56 3.56 0 0 1 .095-2.623s.832-.266 2.726 1.016a9.409 9.409 0 0 1 4.962 0c1.89-1.282 2.717-1.016 2.717-1.016.366.83.402 1.768.1 2.623a3.827 3.827 0 0 1 1.02 2.659c0 3.807-2.319 4.644-4.525 4.889a2.366 2.366 0 0 1 .673 1.834c0 1.326-.012 2.394-.012 2.72 0 .263.18.572.681.475A9.911 9.911 0 0 0 10 .333Z" clip-rule="evenodd"/>
+</svg>
+<span class="sr-only">Icon description</span>
+</button>
+</Link>
+
+            <div className="mt-10 flex flex-col items-center justify-center sm:mt-20">
           <img className="h-[300px]" src="/logo.png" />
           <img className="h-[50px] mt-10" src="/text.png" />
         </div>
@@ -260,7 +270,7 @@ export default function Home() {
 
       <footer class="bg-[#0e1117]">
     <div class="w-full max-w-screen-xl mx-auto p-4">
-        <span class="block text-sm text-white sm:text-center font-mono">Developed by <a href="angelinatsuboi.com" target="_blank" class="hover:underline">Angelina Tsuboi</a> for <a href="angelinatsuboi.com" target="_blank" class="hover:underline">Stellaryx Labs</a></span>
+        <span class="block text-sm text-white sm:text-center font-mono">Developed by <a href="https://angelinatsuboi.com" target="_blank" class="hover:underline">Angelina Tsuboi</a> for <a href="https://stellaryxlabs.com" target="_blank" class="hover:underline">Stellaryx Labs</a></span>
     </div>
 </footer>
 
