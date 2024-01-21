@@ -24,8 +24,18 @@ export default function Home() {
     setIsGeneration(!isGeneration);
   }
 
-   const setHomeOff = () => {
+  const setHomeOff = () => {
     setIsHome(false);
+  }
+
+  const togglePayloadGeneration = () => {
+    setIsHome(false);
+    setIsGeneration(true);
+  }
+
+  const togglePayloadInterpreter = () => {
+    setIsHome(false);
+    setIsGeneration(false);
   }
 
   const handleTranslate = async () => {
@@ -169,14 +179,14 @@ export default function Home() {
       <div className="w-full flex flex-col items-center mt-5">
           <button
             className="w-[600px] mt-10 text-xl font-mono cursor-pointer rounded-md bg-[#8933b6] px-4 border border-white-700 px-4 py-4 font-bold hover:bg-violet-600 active:bg-violet-700"
-            onClick={() => handleTranslate()}
+            onClick={() => togglePayloadGeneration()}
           >
           Payload Generation   🪄
           </button>
 
           <button
             className="w-[600px] mt-10 text-xl font-mono cursor-pointer rounded-md  bg-[#8933b6] px-4 border border-white-700 px-4 py-4 font-bold hover:bg-violet-600 active:bg-violet-700"
-            onClick={() => handleTranslate()}
+            onClick={() => togglePayloadInterpreter()}
           >
           Payload Interpreter   ✨
           </button>
@@ -209,9 +219,46 @@ export default function Home() {
             : 'Enter some code and click "Translate"'}
         </div>
 
+      { isGeneration &&
         <div className="mt-6 flex w-full max-w-[1200px] flex-col justify-between sm:flex-row sm:space-x-4">
           <div className="h-100 flex flex-col justify-center space-y-2 sm:w-2/4">
             <div className="text-center text-xl font-bold">Input</div>
+
+            <TextBlock
+                text={inputCode}
+                editable={!loading}
+                onChange={(value) => {
+                  setInputCode(value);
+                  setHasTranslated(false);
+                }}
+              />
+
+          </div>
+          <div className="mt-8 flex h-full flex-col justify-center space-y-2 sm:mt-0 sm:w-2/4">
+            <div className="text-center text-xl font-bold">Output</div>
+
+            <LanguageSelect
+              language={outputLanguage}
+              onChange={(value) => {
+                setOutputLanguage(value);
+                setOutputCode('');
+              }}
+            />
+
+            {outputLanguage === 'Natural Language' ? (
+              <TextBlock text={outputCode} />
+            ) : (
+              <CodeBlock code={outputCode} />
+            )}
+          </div>
+        </div>
+        }
+
+
+        { !isGeneration &&
+        <div className="mt-6 flex w-full max-w-[1200px] flex-col justify-between sm:flex-row sm:space-x-4">
+          <div className="h-100 flex flex-col justify-center space-y-2 sm:w-2/4">
+            <div className="text-center text-xl font-bold">Payload</div>
 
             <LanguageSelect
               language={inputLanguage}
@@ -246,14 +293,6 @@ export default function Home() {
           <div className="mt-8 flex h-full flex-col justify-center space-y-2 sm:mt-0 sm:w-2/4">
             <div className="text-center text-xl font-bold">Output</div>
 
-            <LanguageSelect
-              language={outputLanguage}
-              onChange={(value) => {
-                setOutputLanguage(value);
-                setOutputCode('');
-              }}
-            />
-
             {outputLanguage === 'Natural Language' ? (
               <TextBlock text={outputCode} />
             ) : (
@@ -261,6 +300,9 @@ export default function Home() {
             )}
           </div>
         </div>
+        }
+
+
         </div>
         }
 
