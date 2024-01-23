@@ -31,7 +31,7 @@ Localhost server should be up and running on `localhost:3000`
 
 ## Contributing ✨
 Payload Wizard is open to any contributions. Please fork the repository and make a pull request with the features or fixes you want to implement.
-This project contains the [MIT License]().
+This project contains the [MIT License](https://github.com/ANG13T/payload-wizard/blob/main/LICENSE).
 
 #### Suggested Features
 - Experimenting with the prompt values sent to the OpenAI API to obtain optimized outputs (check `/pages/utils/index.ts`) 
