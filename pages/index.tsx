@@ -10,13 +10,9 @@ import { useEffect, useState } from 'react';
 
 export default function Home() {
   // Generation Code
-  const [inputGenerationPrompt, setInputGenerationPrompt] = useState<string>('');
+  const [inputPrompt, setInputPrompt] = useState<string>('');
   const [outputLanguage, setOutputLanguage] = useState<string>('Python');
-  const [outputCode, setOutputCode] = useState<string>('');
-
-  // Interepreter Code
-  const [inputCode, setInputCode] = useState<string>('');
-  const [outputFeedback, setOutputFeedback] = useState<string>('');
+  const [outputSnippet, setOutputSnippet] = useState<string>('');
 
   const [model, setModel] = useState<OpenAIModel>('gpt-3.5-turbo');
   const [loading, setLoading] = useState<boolean>(false);
@@ -25,16 +21,9 @@ export default function Home() {
   const [isHome, setIsHome] = useState<boolean>(true);
   const [isGeneration, setIsGeneration] = useState<boolean>(false);
 
-  const handleToggleIsGeneration = () => {
-    setIsGeneration(!isGeneration);
-  }
-
-  const setHomeOff = () => {
-    setIsHome(false);
-  }
-
   const backToHome = () => {
     setIsHome(true);
+    setInputPrompt('');
   }
 
   const togglePayloadGeneration = () => {
@@ -55,39 +44,27 @@ export default function Home() {
       return;
     }
 
-    if (!inputCode) {
-      alert('Please enter payload code.');
+    if (!inputPrompt) {
+      alert('Please enter an input');
       return;
     }
 
-    if (!inputGenerationPrompt) {
-      alert('Please enter payload specifications.');
-      return;
-    }
-
-    if (inputCode.length > maxCodeLength) {
+    if (inputPrompt.length > maxCodeLength) {
       alert(
-        `Please enter code less than ${maxCodeLength} characters. You are currently at ${inputCode.length} characters.`,
-      );
-      return;
-    }
-
-    if (inputGenerationPrompt.length > maxCodeLength) {
-      alert(
-        `Please enter prompt less than ${maxCodeLength} characters. You are currently at ${inputCode.length} characters.`,
+        `Please enter an input less than ${maxCodeLength} characters. You are currently at ${inputPrompt.length} characters.`,
       );
       return;
     }
 
     setLoading(true);
-    setOutputCode('');
+    setOutputSnippet('');
 
     const controller = new AbortController();
 
     const body: TranslateBody = {
-      inputLanguage: "",
+      input: inputPrompt,
+      option: isGeneration ? "Generation" : "Interpretation",
       outputLanguage,
-      inputCode,
       model,
       apiKey,
     };
@@ -127,7 +104,7 @@ export default function Home() {
 
       code += chunkValue;
 
-      setOutputCode((prevCode) => prevCode + chunkValue);
+      setOutputSnippet((prevCode) => prevCode + chunkValue);
     }
 
     setLoading(false);
@@ -259,10 +236,10 @@ export default function Home() {
                   <div className="text-center text-xl font-bold mb-2">Input</div>
 
                   <TextBlock
-                    text={inputCode}
+                    text={inputPrompt}
                     editable={!loading}
                     onChange={(value) => {
-                      setInputCode(value);
+                      setInputPrompt(value);
                       setHasTranslated(false);
                     }}
                     defaultText="Input payload functionality here..."
@@ -278,15 +255,11 @@ export default function Home() {
                     language={outputLanguage}
                     onChange={(value) => {
                       setOutputLanguage(value);
-                      setOutputCode('');
+                      setOutputSnippet('');
                     }}
                   />
 
-                  {outputLanguage === 'Natural Language' ? (
-                    <TextBlock text={outputCode} />
-                  ) : (
-                    <CodeBlock code={outputCode} />
-                  )}
+                  <CodeBlock code={outputSnippet} />
                 </div>
               </div>
             }
@@ -298,10 +271,10 @@ export default function Home() {
                   <div className="text-center text-xl font-bold">Payload</div>
 
                   <CodeBlock
-                    code={inputCode}
+                    code={inputPrompt}
                     editable={!loading}
                     onChange={(value) => {
-                      setInputCode(value);
+                      setInputPrompt(value);
                       setHasTranslated(false);
                     }}
                     defaultText="Input payload code here..."
@@ -311,19 +284,14 @@ export default function Home() {
                 <div className="mt-8 flex h-full flex-col justify-center space-y-2 sm:mt-0 sm:w-2/4">
                   <div className="text-center text-xl font-bold">Output</div>
 
-                  {outputLanguage === 'Natural Language' ? (
-                    <TextBlock text={outputCode} />
-                  ) : (
-                    <CodeBlock code={outputCode} />
-                  )}
+                  <TextBlock text={outputSnippet} />
                 </div>
               </div>
             }
 
 
           </div>
-        }
-
+      }
 
 
       </div>
