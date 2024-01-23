@@ -155,7 +155,7 @@ export default function Home() {
         <title>Payload Wizard</title>
         <meta
           name="description"
-          content="Use AI to translate code from one language to another."
+          content="An AI assistant utilizing GPT language models to interpret and generate cybersecurity payloads"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪄</text></svg>"></link>
@@ -187,6 +187,7 @@ export default function Home() {
 
         {isHome &&
           <div className="w-full flex flex-col items-center mt-5">
+            <p className='font-mono'>An advanced AI assistant utilizing GPT language models to interpret and generate cybersecurity payloads</p>
             <button
               className="w-[600px] mt-10 text-xl font-mono cursor-pointer rounded-md bg-[#8933b6] px-4 border border-white-700 px-4 py-4 font-bold hover:bg-violet-600 active:bg-violet-700"
               onClick={() => togglePayloadGeneration()}
