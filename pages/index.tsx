@@ -4,6 +4,7 @@ import { LanguageSelect } from '@/components/LanguageSelect';
 import { ModelSelect } from '@/components/ModelSelect';
 import { TextBlock } from '@/components/TextBlock';
 import { OpenAIModel, TranslateBody } from '@/types/types';
+import { GenerationInput, GenerationOutput, InterpretationInput, InterpretationOutput } from '@/utils/defaults';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -30,11 +31,17 @@ export default function Home() {
   const togglePayloadGeneration = () => {
     setIsHome(false);
     setIsGeneration(true);
+    // defaults for generation
+    setInputPrompt(GenerationInput);
+    setOutputSnippet(GenerationOutput);
   }
 
   const togglePayloadInterpreter = () => {
     setIsHome(false);
     setIsGeneration(false);
+    // defaults for interpretation
+    setInputPrompt(InterpretationInput);
+    setOutputSnippet(InterpretationOutput);
   }
 
   const handleTranslate = async () => {
