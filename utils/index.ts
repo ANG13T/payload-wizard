@@ -16,7 +16,6 @@ const createPrompt = (
     You are an expert programmer in all programming languages.
     Generate a script in the ${outputLanguage} language with the following functionality (Do not include \`\`\` for code snippet):
     ${input}
-
     `;
   } else {
     return endent`
@@ -29,13 +28,13 @@ const createPrompt = (
 };
 
 export const OpenAIStream = async (
-  inputLanguage: string,
+  option: string,
+  input: string,
   outputLanguage: string,
-  inputCode: string,
   model: string,
   key: string,
 ) => {
-  const prompt = createPrompt(inputLanguage, outputLanguage, inputCode);
+  const prompt = createPrompt(option, input, outputLanguage);
 
   const system = { role: 'system', content: prompt };
 

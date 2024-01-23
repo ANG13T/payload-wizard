@@ -24,6 +24,7 @@ export default function Home() {
   const backToHome = () => {
     setIsHome(true);
     setInputPrompt('');
+    setOutputSnippet('')
   }
 
   const togglePayloadGeneration = () => {
